@@ -60,9 +60,6 @@ int main(void)
         
     }
 
-    int conversionCounter = 0;
-
-    gpio_
     while (1) {
         sample = adc_sample(ADC_LINE(0), RESOLUTION);
 
