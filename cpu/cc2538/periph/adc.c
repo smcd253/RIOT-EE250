@@ -29,9 +29,6 @@
 #define ENABLE_DEBUG (0)
 #include "debug.h"
 
-//--------------------- HACK ------------------
-#include "cc2538_gpio.h"
-
 
 int adc_init(adc_t line)
 {
@@ -50,6 +47,9 @@ int adc_init(adc_t line)
 
     // ---------------- HACK ---------------
     gpio_init(GPIO_PIN(PORT_D,2), GPIO_OUT);
+
+    gpio_clear(GPIO_PIN(PORT_D,2));
+    
 
     return 0;
 }
