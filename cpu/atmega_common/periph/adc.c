@@ -25,6 +25,8 @@
 #include "assert.h"
 #include "periph/adc.h"
 #include "periph_conf.h"
+// ------------------ HACK ----------------
+#include "gpio.h"
 
 #define ADC_MAX_CLK         (200000U)
 
@@ -46,6 +48,9 @@ static inline void _done(void)
 
 int adc_init(adc_t line)
 {
+    // ------------------ HACK ----------------
+    gpio_init(GPIO_PIN(PORT_D,2), GPIO_OUT);
+
     /* check if the line is valid */
     if (line >= ADC_NUMOF) {
         return -1;
@@ -128,8 +133,14 @@ int adc_sample(adc_t line, adc_res_t res)
        be performed in single conversion mode. */
     ADCSRA |= (1 << ADSC);
 
+    // -------------------- HACK ---------------
+    gpio_set(GPIO_PIN(PORT_D,2));
+
     /* Wait until the conversion is complete */
     while (ADCSRA & (1 << ADSC)) {}
+
+    // ------------------- HACK -----------
+    gpio_clear(GPIO_PIN(PORT_D,2));
 
     /* Get conversion result */
     sample = ADC;

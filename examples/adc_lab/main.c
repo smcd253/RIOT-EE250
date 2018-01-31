@@ -24,6 +24,7 @@
 #include "timex.h"
 #include "periph/adc.h"
 
+
 /**
  * ADC_RES_#BIT is defined in many possible places depending on ADC's supported 
  * resolutions. Since the CC2538 SoC has an internal ADC, you can find the
@@ -42,7 +43,8 @@ int main(void)
     int sample = 0; 
 
     puts("\nEE 250 Lab 02: ADC and Kernel Hacking\n");
-
+   
+    
     /**
      * Initialize only ADC line 0 which corresponds to the Cortex M3's Port A
      * Pin 3, or "PA2" on a schematic. This corresponds to the AD4/DIO4 pin on
@@ -54,8 +56,13 @@ int main(void)
         return 1;
     } else {
         printf("Successfully initialized ADC_LINE(0)\n");
+        
+        
     }
 
+    int conversionCounter = 0;
+
+    gpio_
     while (1) {
         sample = adc_sample(ADC_LINE(0), RESOLUTION);
 
@@ -63,6 +70,7 @@ int main(void)
             printf("Error: resolution not supported?\n");
         } else {
             printf("ADC_LINE(0): %i\n", sample);
+
         }
 
         /** 
