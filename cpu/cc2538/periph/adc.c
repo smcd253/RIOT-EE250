@@ -30,7 +30,7 @@
 #include "debug.h"
 
 //--------------------- HACK ------------------
-#include "gpio.h"
+#include "cc2538_gpio.h"
 
 
 int adc_init(adc_t line)
